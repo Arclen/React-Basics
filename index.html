@@ -59,28 +59,41 @@ ol, ul {
 <script src="https://cdnjs.cloudflare.com/ajax/libs/babel-core/5.8.34/browser.min.js"></script>
 
 <script type="text/babel" data-presets="es2015,stage-0">
-class Square extends React.Component {
-    constructor() {
-        super();
-        this.state = {
-            value: '0'
-        }
-    }
-  render() {
+function Square(props) {
     return (
-      <button className="square" onClick={() => this.setState({value: 'X'})}>
-        {this.state.value}
+      <button className="square" onClick={this.props.onClick()}>
+        {this.props.value}
       </button>
     );
   }
-}
 
 class Board extends React.Component {
-  renderSquare(i) {
-    return <Square />;
+    constructor() {
+        super();
+        this.state = {
+            squares: Array(9).fill(null)
+        }
+    }
+  handleClick(){
+      const squares = this.state.squares.slice();
+      squares[i] = this.state.xIsNext ? 'X' : 'O';
+      this.setState({
+          squares: squares,
+          xIsNext: !this.state.xIsNext
+      });
   }
+  
+    renderSquare(i) {
+    return <Square value={this.state.squares[i]} onclic={{() => this.handleClick(i)}/>;
+    }
   render() {
-    const status = 'Next player: X';
+      const winner = calculateWinner(this.state.sqare);
+    let status = 'Next player: X';
+    if(winner){
+    status = 'Winner: ${winner}';
+    } else {
+        status = 'Next player: ${this.state.xIsNext ? 'X' : 'O'}';
+    }
     return (
       <div>
         <div className="status">{status}</div>
