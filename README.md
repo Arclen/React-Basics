@@ -8,3 +8,4 @@
   
   Future research: Flux/Redux, Reselect, Webpack, Relay/GraphQL, React Native
   
+  //this tutorial makes absolutely no sense what the heck he isn't explaining anything he's just like "Hey, do this" this isn't helpful at all
